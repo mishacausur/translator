@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 public final class word: Codable {
     public var word: String
@@ -16,3 +17,5 @@ public final class word: Codable {
         self.translation = translation
     }
 }
+
+

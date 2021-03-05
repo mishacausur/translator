@@ -20,7 +20,21 @@ class VocViewController: UIViewController {
         return bar
     }()
     
+
+    private lazy var vocCollectionView: UICollectionView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collection.dataSource = self
+        collection.delegate = self
+        collection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CellID")
+        collection.backgroundColor = .white
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        
+        return collection
+    }()
+
 //    private let navItem = UINavigationItem()
+
     
     let tabBar: UITabBar = {
         let bar = UITabBar()
@@ -47,7 +61,12 @@ class VocViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(navBar)
         view.addSubview(tabBar)
+
+        view.addSubview(vocCollectionView)
+        navigationController?.navigationBar.isHidden = false
+
         navigationController?.navigationBar.isHidden = true
+
         
         let constraint = [
             navBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -57,9 +76,28 @@ class VocViewController: UIViewController {
         
             tabBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tabBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 49)]
+            tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 49),
         
+            vocCollectionView.topAnchor.constraint(equalTo: navBar.bottomAnchor),
+            vocCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            vocCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            vocCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)]
+        
+       
         NSLayoutConstraint.activate(constraint)
     }
+    
+}
+
+extension VocViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = vocCollectionView.dequeueReusableCell(withReuseIdentifier: "CellID", for: indexPath)
+        return cell
+    }
+    
     
 }
