@@ -28,7 +28,19 @@ class NewWordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       
+        view.addSubview(loginButton)
+        setupViews()
+    }
+    
+    private func setupViews() {
+        let constraints = [
+            loginButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            loginButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            loginButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            loginButton.heightAnchor.constraint(equalToConstant: 40)
+            
+        ]
+        NSLayoutConstraint.activate(constraints)
     }
     
 

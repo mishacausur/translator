@@ -12,10 +12,15 @@ class VocViewController: UIViewController {
     let navBar: UINavigationBar = {
         let bar = UINavigationBar()
         let navItem = UINavigationItem(title: "Словарь")
+        let addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: nil)
+        navItem.rightBarButtonItem = addButton
         bar.setItems([navItem], animated: false)
         bar.translatesAutoresizingMaskIntoConstraints = false
+        bar.backgroundColor = .white
         return bar
     }()
+    
+//    private let navItem = UINavigationItem()
     
     let tabBar: UITabBar = {
         let bar = UITabBar()
@@ -27,6 +32,9 @@ class VocViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Словарь"
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: nil)
+        
         setupView()
     }
     
@@ -39,10 +47,10 @@ class VocViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(navBar)
         view.addSubview(tabBar)
-        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.isHidden = true
         
         let constraint = [
-            navBar.topAnchor.constraint(equalTo: view.topAnchor),
+            navBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             navBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             navBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             navBar.heightAnchor.constraint(equalToConstant: 44),
